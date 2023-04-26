@@ -5,6 +5,8 @@ import Navigation from "./routes/navigation/navigation.component";
 import ListaClientes from "./routes/lista-clientes/lista-clientes.compoent";
 import ProyeccionAnalisis from "./routes/proyeccion-analisis/proyeccion-analisis.component";
 
+import "semantic-ui-css/semantic.min.css";
+
 function App() {
   return (
     <Routes>
