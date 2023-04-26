@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Button, Form } from "semantic-ui-react";
-import FormInput from "../form-input/form-input.component";
+import FormInput from "../../components/form-input/form-input.component";
 import "semantic-ui-css/semantic.min.css";
 
 const initialValues = {
@@ -38,7 +38,7 @@ const FormCliente = () => {
         onChange={onChangeForm}
         value={name}
       />
- <FormInput
+      <FormInput
         label="Apellido"
         type="text"
         placeholder="Apellido"
