@@ -1,7 +1,9 @@
 import { useState } from "react";
 
 import { Button, Form, Segment } from "semantic-ui-react";
-import FormInput from "../../components/form-input/form-input.component";
+import FormInput from "../../components/form-input/form-input.components";
+import { db, crearCliente } from "../../utils/firebase/firebase.utils";
+import { collection, getDocs } from "firebase/firestore";
 
 import { FormClienteContainer } from "./form-cliente.styles"
 
@@ -13,6 +15,8 @@ const initialValues = {
 };
 
 const FormCliente = () => {
+  const collectionRef = collection(db, "clientes")
+
   const [formValues, setFormValues] = useState(initialValues);
   const { name, surname, age, birthdate } = formValues;
 
@@ -24,15 +28,28 @@ const FormCliente = () => {
     });
   };
 
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    crearCliente(formValues)
+  }
+  const getData = ()=>{
+    getDocs(collectionRef)
+    .then(response =>{
+      response.docs.map((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+      });
+    })
+    .catch(err =>{
+      alert(err.message)
+    })
+  }
   return (
     <FormClienteContainer>
     <Segment>
 
       <Form
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log(formValues);
-        }}
+        onSubmit={handleSubmit}
       >
         <FormInput
           label="Nombre"
@@ -68,6 +85,7 @@ const FormCliente = () => {
         />
         <Button type="submit">Enviar</Button>
       </Form>
+        <Button onClick={getData}>Obtener Data</Button>
     </Segment>
 
     </FormClienteContainer>
