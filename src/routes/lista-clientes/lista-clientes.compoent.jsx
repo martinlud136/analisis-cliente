@@ -7,11 +7,16 @@ import  CardCliente  from "../../components/card-cliente/card-cliente.component"
 import { CardClientesContainer } from "./liste-clientes.styles"
 
 const ListaClientes = () => {
-  const { clientes } = useContext(ClientesContext);
+  const { clientes, esperanzaVida } = useContext(ClientesContext);
   return (
     <CardClientesContainer>
       {clientes.map((cliente) => {
-        return<CardCliente key={cliente.name} cliente={cliente}/>;
+        const {birthdate} = cliente
+        const ageBirth = new Date(birthdate).getFullYear()
+ 
+        const esperanzaVidaCliente = esperanzaVida.find(data => data[ageBirth] !== undefined)[ageBirth]
+        console.log(parseFloat(esperanzaVidaCliente));
+        return<CardCliente key={cliente.name} cliente={cliente} esperanzaVidaCliente={esperanzaVidaCliente}/>;
       })}
     </CardClientesContainer>
   );
