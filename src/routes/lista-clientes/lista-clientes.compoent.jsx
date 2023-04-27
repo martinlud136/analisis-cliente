@@ -15,8 +15,7 @@ const ListaClientes = () => {
         const ageBirth = new Date(birthdate).getFullYear()
  
         const esperanzaVidaCliente = esperanzaVida.find(data => data[ageBirth] !== undefined)[ageBirth]
-        console.log(parseFloat(esperanzaVidaCliente));
-        return<CardCliente key={cliente.name} cliente={cliente} esperanzaVidaCliente={esperanzaVidaCliente}/>;
+        return<CardCliente key={cliente.id} cliente={cliente} esperanzaVidaCliente={esperanzaVidaCliente}/>;
       })}
     </CardClientesContainer>
   );

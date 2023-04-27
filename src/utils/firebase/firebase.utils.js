@@ -34,7 +34,7 @@ export const crearCliente = async (formValues) => {
 export const obtenerClientes = async () => {
   try {
     const response = await getDocs(collectionRef);
-    const clientes = response.docs.map((cliente) => cliente.data());
+    const clientes = response.docs.map((cliente) => ({...cliente.data(),id: cliente.id}));
     return clientes;
   } catch (err) {
     console.err("Error al obtener clientes", {
